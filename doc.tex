@@ -42,6 +42,15 @@
 
 \patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
 
+
+
+\makeatletter
+\newcommand\xleftrightarrow[2][]{%
+  \ext@arrow 9999{\longleftrightarrowfill@}{#1}{#2}}
+\newcommand\longleftrightarrowfill@{%
+  \arrowfill@\Leftarrow=\Rightarrow}
+\makeatother
+
 \begin{document}
 
 \begin{titlepage}
@@ -300,8 +309,88 @@ je $(q_0, a) \vdash (q_1, a) \vdash (q_2, a) \vdash (q_3, a) \vdash (q_4, \epsil
 \newpage
 \section{5. úloha}
 
-\newpage
+\begin{equation}
+L = \{ w \in \{a, b\}^* \hspace{0.2cm}| \hspace{0.2cm} \#_a(w) \hspace{0.1cm} mod \hspace{0.1cm} 2 \ne 0 \land \#_b(w) \le 2 \}
+\end{equation}
 
+\begin{enumerate}
+    \item Nechť $L$ je lubovolný(nie nutne regulárny) jazyk nad abecedou $\{ a,b \}$. Na množine $\Sigma^*$ nadefinujeme reláciu $\sim_L$ tvz. prefixovú ekvivalenciu pre L takto: 
+
+    \begin{equation*}
+    \begin{aligned}
+        \forall u, v \in \{a, b\}^*: u \sim_L v \Leftrightarrow \bigg( ( \#_a(u) \hspace{0.2cm}mod\hspace{0.2cm} 2 = \#_a(v) \hspace{0.2cm} mod \hspace{0.2cm} 2 \hspace{0.1cm} ) \land \\
+        \Big( ( \#_b(u) = 0 \land \#_b(v) = 0 ) \lor \\ 
+              ( \#_b(u) = 1 \land \#_b(v) = 1 ) \lor \\
+              ( \#_b(u) = 2 \land \#_b(v) = 2 ) \lor \\
+              ( \#_b(u) > 2 \land \#_b(v) > 2 ) \Big) \bigg)
+    \end{aligned}
+    \end{equation*}
+
+    Podľa \textbf{Vety 3.21} (2.varianta Myhill-Nerodovej vety) počet stavov lubovolného minimálného DKA prijímacieho L je rovno indexu $\sim_L$(Takový DKA existuje práve vtedy, keď je index $\sim_L$ konečný). To znamá, že si zostrojíme minimálny DKA a následne zapíšeme rozklad $\Sigma^* / \sim_L$ a určime počet tried tohoto rozkladu.
+
+    
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{5.eps}
+    \end{center}
+    \newpage
+
+    \item Rozklad $\Sigma^* / \sim_L$:
+
+    \begin{equation*}
+    \begin{aligned}
+        L^{-1}(q_0) = \{w | \#_a(w) mod 2 = 0 \land \#_b(w) = 0 \} \\
+        L^{-1}(q_1) = \{w | \#_a(w) mod 2 = 0 \land \#_b(w) = 1 \} \\
+        L^{-1}(q_2) = \{w | \#_a(w) mod 2 = 0 \land \#_b(w) = 2 \} \\
+        L^{-1}(q_3) = \{w | \#_a(w) mod 2 = 1 \land \#_b(w) = 0 \} \\
+        L^{-1}(q_4) = \{w | \#_a(w) mod 2 = 1 \land \#_b(w) = 1 \} \\
+        L^{-1}(q_5) = \{w | \#_a(w) mod 2 = 1 \land \#_b(w) = 2 \} \\
+        L^{-1}(q_6) = \{w | \#_a(w) mod 2 = 0 \lor  \#_b(w) > 2 \}
+    \end{aligned}
+    \end{equation*}
+
+
+\item Relácia $\sim_L$ má konečný index(7), to znamená že jazyk L je regulárny - vyplýva z \textbf{3.21}. Konečný automat, ktorý odpoviedá $\sim_L$ je minimálny konečný automat prijímajúci L.  Zjednotením tried $L^{-1}(q_3), L^{-1}(q_4)$ a $L^{-1}(q_5)$ vznikne jazyk L.
+
+    \begin{equation}
+        L = L^{-1}(q_3) \cup L^{-1}(q_4) \cup L^{-1}(q_5) 
+    \end{equation}
+
+
+
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
 \section{Literatura}
 \bibliographystyle{czechiso}
 \begin{flushleft}
