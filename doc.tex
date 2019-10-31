@@ -27,6 +27,7 @@
 \usepackage{supertabular}
 \usepackage[titles]{tocloft}
 \usepackage{dirtytalk}
+\usepackage{pdfpages}
 
 \def\UrlBreaks{\do\/\do-} % URL breaking characters
 
@@ -112,6 +113,9 @@
 
 \newpage
 
+\includepdf[pagecommand={},width=1.5\textwidth]{zadanie1.pdf}
+
+
 \section{1. úloha}
 \subsection{a)}
 
@@ -126,13 +130,13 @@ Musíme dokázať, že následujúci vzťah je platný:
 L_1, L_2 \in \mathcal{L}_3 \Rightarrow L_1 \cup \overline{L_2} \in \mathcal{L}_3
 \end{equation}
 
-Z Věty 3.2(študijná opora - strana 50.) vyplýva, že trieda regularných jazykov je uzavretá vzhľadom k operáciam sjednocenie a komplementu \cite{AA}. Na základe toho môžeme povedať, že
+Z \textbf{Věty 3.23}(študijná opora - strana 50.) vyplýva, že trieda regularných jazykov je uzavretá vzhľadom k operáciam sjednocenie a komplementu \cite{AA}. Na základe toho môžeme povedať, že
 
 \begin{equation}
 L_1, L_2 \in \mathcal{L}_3 \Rightarrow L_1 \circ L_2 \in \mathcal{L}_3
 \end{equation}
 
-je platný vzťah.
+je \textbf{platný} vzťah.
 
 
 
@@ -171,7 +175,7 @@ Podľa vyššie uvedených vzťahov môžeme vyhlásiť, že $\overline{\overlin
 
 Budeme predpokladať, že
 \begin{equation}
-L_1 \in \mathcal{L}_3, L_2 \in \mathcal{L}_2 \Rightarrow L_1 \circ L_2 \in \mathcal{L}_2
+    L_1 \in \mathcal{L}_3, L_2 \in \mathcal{L}_2 \Rightarrow L_1 \cup \overline{L_2} \in \mathcal{L}_2
 \end{equation}
 je pravdivý vzťah. $L_1$ a $L_2$ sú dva jazyky nad abecedou $\Sigma$. Vieme, že $L_1 \in \mathcal{L}_3$(regulárny jazyk), môžeme si vyjádriť $L_1$, ako $L_1 = \Sigma^*$ a potom musí platiť:
 
@@ -179,7 +183,7 @@ je pravdivý vzťah. $L_1$ a $L_2$ sú dva jazyky nad abecedou $\Sigma$. Vieme, 
 \Sigma^* \cup \overline{L_2} \in \mathcal{L}_2 \Rightarrow \overline{L_2} \in \mathcal{L}_2 \hspace{1cm}\textbf{SPOR}
 \end{equation}
 
-Dostali sme sa k \textbf{sporu}, pretože z \textbf{Vety 4.23} vyplýva, že bezkontextové jazyky nie sú uzavreté vzhľadom k operácii doplňok \cite{AA}. Takže vzťah
+Dostali sme sa k \textbf{sporu}, pretože z \textbf{Vety 4.24} vyplýva, že bezkontextové jazyky nie sú uzavreté vzhľadom k operácii doplňok \cite{AA}. Takže vzťah
 
 \begin{equation}
 L_1 \in \mathcal{L}_3, L_2 \in \mathcal{L}_2 \Rightarrow L_1 \circ L_2 \in \mathcal{L}_2
@@ -189,16 +193,31 @@ je \textbf{neplatný}.
 \newpage
 \section{2. úloha}
 
-\includegraphics[width=\textwidth]{QFSMpng.eps}
+\begin{center}
+    \includegraphics[width=0.6\textwidth]{QFSMpng.eps}
+\end{center}
 
-blablabla
+\begin{align*}
+    & M_L = (Q, \Sigma, \Gamma, \delta, q_0, S_0, F)
+\end{align*}
 
 
+\begin{align*}
+    & Q = \{q_0, q_1, q_2, q_3, q_4, q_5\} \\
+    & \Sigma = \{a, b, \# \} \\
+    & \Gamma = \{S_0, 1 \} \\
+    & F = \{ q_5 \} \\
+    & \delta:
+\end{align*}
 
-
-
-
-
+\begin{align*}
+    \delta(q_0, a, S_0) &= (q_0, 1S_0)  & \delta(q_1, b, 1)             &= (q_1, 111)         & \delta(q_3, \varepsilon, 1)   &= (q_2, \varepsilon) \\
+    \delta(q_0, a, 1)   &= (q_0, 11)    & \delta(q_1, \#, 1)            &= (q_2, 1)           & \delta(q_4, b, 1)             &= (q_4, \varepsilon) \\
+    \delta(q_0, b, S_0) &= (q_1, 11S_0) & \delta(q_2, a, 1)             &= (q_3, \varepsilon) & \delta(q_4, \varepsilon, S_0) &= (q_5, \varepsilon) \\
+    \delta(q_0, b, 1)   &= (q_1, 111)   & \delta(q_2, b, 1)             &= (q_4, \varepsilon) \\
+    \delta(q_0, \#, S_0)&= (q_2, S_0)   & \delta(q_2, \varepsilon, S_0) &= (q_5, \varepsilon) \\
+    \delta(q_0, \#, 1)  &= (q_2, 1)     \\
+\end{align*}
 
 
 \newpage
