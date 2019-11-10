@@ -177,10 +177,10 @@ Budeme predpokladať, že
 \begin{equation}
     L_1 \in \mathcal{L}_3, L_2 \in \mathcal{L}_2 \Rightarrow L_1 \cup \overline{L_2} \in \mathcal{L}_2
 \end{equation}
-je pravdivý vzťah. $L_1$ a $L_2$ sú dva jazyky nad abecedou $\Sigma$. Vieme, že $L_1 \in \mathcal{L}_3$(regulárny jazyk), môžeme si vyjádriť $L_1$, ako $L_1 = \Sigma^*$ a potom musí platiť:
+je pravdivý vzťah. $L_1$ a $L_2$ sú dva jazyky nad abecedou $\Sigma$. Vieme, že $L_1 \in \mathcal{L}_3$(regulárny jazyk), môžeme si vyjádriť $L_1$, ako $L_1 = \emptyset$ a potom podľa zadania úlohy musí platiť:
 
 \begin{equation}
-\Sigma^* \cup \overline{L_2} \in \mathcal{L}_2 \Rightarrow \overline{L_2} \in \mathcal{L}_2 \hspace{1cm}\textbf{SPOR}
+\emptyset \cup \overline{L_2} \in \mathcal{L}_2 \Rightarrow \overline{L_2} \in \mathcal{L}_2 \hspace{1cm}\textbf{SPOR}
 \end{equation}
 
 Dostali sme sa k \textbf{sporu}, pretože z \textbf{Vety 4.24} vyplýva, že bezkontextové jazyky nie sú uzavreté vzhľadom k operácii doplňok \cite{AA}. Takže vzťah
@@ -295,9 +295,9 @@ Algoritmus, ktorý pre daný nedeterministický konečný automat $A = (Q, \Sigm
 
 \paragraph{Metóda}\mbox{{}}\\
 
-$\textbf{X} \gets \{ \exists w \in \Sigma^* \hspace{0.2cm} \forall i \in \mathbb{N} \land 0 \le i < 5 \hspace{0.2cm} | \hspace{0.2cm} (q_o, w) \vdash^i (q_f, \varepsilon) \land q_f \in F \}$
+$\textbf{M} \gets \{ \exists w \in \Sigma^* \hspace{0.2cm} \forall i \in \mathbb{N} \land 0 \le i < 5 \hspace{0.2cm} | \hspace{0.2cm} (q_o, w) \vdash^i (q_f, \varepsilon) \land q_f \in F \}$
 
-\textbf{if} $(|X| == 0)$
+\textbf{if} $(|M| == 0)$
 
 \hspace{0.55cm} return Áno
 
@@ -314,14 +314,14 @@ Následne kontrolujeme, či počet retezcov v tejto množine sa rovná nule. Ak 
 
 \paragraph{Demonštrácia}\mbox{{}}\\
 \begin{enumerate}
-  \item Najprv si vytvoríme množinu $X$, ktorá bude obsahovať všetky reťezce, ktoré majú délku menšiu ako 5.
+  \item Najprv si vytvoríme množinu $M$, ktorá bude obsahovať všetky reťezce, ktoré majú délku menšiu ako 5.
 
   \item Hovoríme, že vstupný retezec $w$ je prijímán nedeterministickým konečným automatom A, keď  $(q_0, w) \vdash^i (q_f,\epsilon) \land q_f \in F$ pre i >= 0 - Študijná opora(Veta 3.3) \cite{AA}.
 Na demonštráciu si zvolíme $i = 4$, teda $(q_0, w_1) \vdash (q_1, w_2) \vdash (q_2, w_3) \vdash (q_3, w_4) \vdash (q_4, \epsilon)$. Jediný možný prípad, ktorý nás dovedie k riešení(koncový stav - $f_4$)
 je $(q_0, a) \vdash (q_1, a) \vdash (q_2, a) \vdash (q_3, a) \vdash (q_4, \epsilon)$.
 
   \item Dostali sme reťazec $w = aaaa$. Tento reťazec je prijíman nedeterministickým konečným automatom A.
-  \item $|w| < 5 \Rightarrow w \in X \Rightarrow |X| \ne 0 \Rightarrow$ algoritmus vrátil \say{Nie} $\Rightarrow \exists w \in L(A) : |w| < 5$.
+  \item $|w| < 5 \Rightarrow w \in M \Rightarrow |X| \ne 0 \Rightarrow$ algoritmus vrátil \say{Nie} $\Rightarrow \exists w \in L(A) : |w| < 5$.
 \end{enumerate}
 
 
@@ -333,7 +333,7 @@ L = \{ w \in \{a, b\}^* \hspace{0.2cm}| \hspace{0.2cm} \#_a(w) \hspace{0.1cm} mo
 \end{equation}
 
 \begin{enumerate}
-    \item Nechť $L$ je lubovolný(nie nutne regulárny) jazyk nad abecedou $\{ a,b \}$. Na množine $\Sigma^*$ nadefinujeme reláciu $\sim_L$ tvz. prefixovú ekvivalenciu pre L takto: 
+    \item Nechť $L$ je lubovolný(nie nutne regulárny) jazyk nad abecedou $\{ a,b \}$. Na množine $\{ a,b \}^*$ nadefinujeme reláciu $\sim_L$ tvz. prefixovú ekvivalenciu pre L takto: 
 
     \begin{equation*}
     \begin{aligned}
@@ -357,18 +357,18 @@ L = \{ w \in \{a, b\}^* \hspace{0.2cm}| \hspace{0.2cm} \#_a(w) \hspace{0.1cm} mo
 
     \begin{equation*}
     \begin{aligned}
-        L^{-1}(q_0) = \{w | \#_a(w) mod 2 = 0 \land \#_b(w) = 0 \} \\
-        L^{-1}(q_1) = \{w | \#_a(w) mod 2 = 0 \land \#_b(w) = 1 \} \\
-        L^{-1}(q_2) = \{w | \#_a(w) mod 2 = 0 \land \#_b(w) = 2 \} \\
-        L^{-1}(q_3) = \{w | \#_a(w) mod 2 = 1 \land \#_b(w) = 0 \} \\
-        L^{-1}(q_4) = \{w | \#_a(w) mod 2 = 1 \land \#_b(w) = 1 \} \\
-        L^{-1}(q_5) = \{w | \#_a(w) mod 2 = 1 \land \#_b(w) = 2 \} \\
-        L^{-1}(q_6) = \{w | \#_a(w) mod 2 = 0 \lor  \#_b(w) > 2 \}
+        L^{-1}(q_0) &= \{w |   \#_a(w) mod 2 = 0 \land \#_b(w) = 0 \} \\
+        L^{-1}(q_1) &= \{w |   \#_a(w) mod 2 = 0 \land \#_b(w) = 1 \} \\
+        L^{-1}(q_2) &= \{w |   \#_a(w) mod 2 = 0 \land \#_b(w) = 2 \} \\
+        L^{-1}(q_3) &= \{w |   \#_a(w) mod 2 = 1 \land \#_b(w) = 0 \} \\
+        L^{-1}(q_4) &= \{w |   \#_a(w) mod 2 = 1 \land \#_b(w) = 1 \} \\
+        L^{-1}(q_5) &= \{w |   \#_a(w) mod 2 = 1 \land \#_b(w) = 2 \} \\
+        L^{-1}(q_6) &= \{w | ( \#_b(w) > 2) \land (\#_a(w) mod 2 = 0 \lor  \#_a(w) mod 2 = 1 ) \}
     \end{aligned}
     \end{equation*}
 
 
-\item Relácia $\sim_L$ má konečný index(7), to znamená že jazyk L je regulárny - vyplýva z \textbf{3.21}. Konečný automat, ktorý odpoviedá $\sim_L$ je minimálny konečný automat prijímajúci L.  Zjednotením tried $L^{-1}(q_3), L^{-1}(q_4)$ a $L^{-1}(q_5)$ vznikne jazyk L.
+\item Relácia $\sim_L$ má konečný index(7), to znamená že jazyk L je regulárny - vyplýva z \textbf{3.20} a \textbf{3.21}. Konečný automat, ktorý odpoviedá $\sim_L$ je minimálny konečný automat prijímajúci L.  Zjednotením tried $L^{-1}(q_3), L^{-1}(q_4)$ a $L^{-1}(q_5)$ vznikne jazyk L.
 
     \begin{equation}
         L = L^{-1}(q_3) \cup L^{-1}(q_4) \cup L^{-1}(q_5) 
